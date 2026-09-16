@@ -14,12 +14,19 @@ jobs:
       - name: Show Xcode version
         run: xcodebuild -version
 
-      - name: Build
+            - name: Build
         run: |
           xcodebuild \
             -project BLE-Scanner.xcodeproj \
             -scheme BLE-Scanner \
             -sdk iphoneos \
             -configuration Debug \
+            -derivedDataPath build \
             CODE_SIGNING_ALLOWED=NO \
             build
+
+      - name: Upload app
+        uses: actions/upload-artifact@v4
+        with:
+          name: BTLEmap-app
+          path: build/Build/Products/Debug-iphoneos/BLE-Scanner.app
