@@ -25,8 +25,14 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             build
 
+      - name: Check built app
+        run: |
+          ls -la build/Build/Products/Debug-iphoneos/
+          test -d build/Build/Products/Debug-iphoneos/BLE-Scanner.app
+
       - name: Upload app
         uses: actions/upload-artifact@v4
         with:
           name: BTLEmap-app
           path: build/Build/Products/Debug-iphoneos/BLE-Scanner.app
+          if-no-files-found: error
