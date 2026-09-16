@@ -14,7 +14,7 @@ jobs:
       - name: Show Xcode version
         run: xcodebuild -version
 
-            - name: Build
+      - name: Build
         run: |
           xcodebuild \
             -project BLE-Scanner.xcodeproj \
