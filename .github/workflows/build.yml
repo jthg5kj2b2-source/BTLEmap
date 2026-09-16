@@ -32,9 +32,16 @@ jobs:
 
       - name: Package IPA
         run: |
-          mkdir -p Payload
+          rm -rf Payload BTLEmap.ipa
+          mkdir Payload
           cp -R build/Build/Products/Debug-iphoneos/BTLEmap.app Payload/
-          zip -r BTLEmap.ipa Payload
+          zip -qry BTLEmap.ipa Payload
+          echo "=== IPA ==="
+          ls -lh BTLEmap.ipa
+          echo "=== IPA contents ==="
+          unzip -l BTLEmap.ipa | head -30
+          echo "=== APP ==="
+          ls -la Payload/BTLEmap.app
 
       - name: Upload app
         uses: actions/upload-artifact@v4
